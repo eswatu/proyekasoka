@@ -1,0 +1,68 @@
+<div class="Surat-edit">
+    <h2 mat-dialog-title>{{title}}</h2>
+    <p *ngIf="this.id && !jobOrder"><em>Loading...</em></p>
+
+    <div matDialogContent class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div *ngIf="form.invalid " class="alert alert-danger">
+            <strong>ERROR</strong>:Surat yang sama pernah dientry.
+        </div>
+        <div class="form-group" style="min-height: fit-content;min-width: auto;">
+            <!--nama klien-->
+            <mat-form-field hintLabel="Nama Klien" appearance="fill">
+                <mat-label>Nama Klien</mat-label>
+                <input matInput #input placeholder="contoh: bpk andrea" id="namaKlien" formControlName="namaKlien" required class="form-control">
+                <mat-hint align="end">{{input.value?.length}}</mat-hint>
+            </mat-form-field>
+            <!--Nomor Surat-->
+            <mat-form-field hintLabel="Nomor Surat" appearance="fill">
+                <mat-label>Nomor Surat</mat-label>
+                <input matInput #input placeholder="contoh: S-xxx/xxx/xxx" id="nomorSurat" formControlName="nomorSurat" required class="form-control">
+            </mat-form-field>
+            <!--tanggal Surat-->
+            <mat-form-field appearance="outline">
+                <mat-label >Pilih Tanggal</mat-label>
+                <input matInput [matDatepicker]="datepicker" formControlName="tanggalSurat">
+                <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <mat-datepicker #datepicker>
+                    <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel color="danger">Batal</button>
+                    <button mat-raised-button color="primary" matDatepickerApply>Pilih</button>
+                    </mat-datepicker-actions>
+                </mat-datepicker>
+                <div *ngIf="hasError('tanggalSurat')" class="invalid-feedback">
+                    <div *ngIf="form.get('tanggalSurat').errors?.required">
+                        Tanggal tidak boleh kosong.
+                    </div>
+                </div>
+            </mat-form-field>
+            <!--id Koordinator-->
+            <mat-form-field *ngIf="listKoordinator" appearance="outline" id="idKoordinator">
+                <mat-label>Pilih Koordinator</mat-label>
+                <mat-select id="idKoordinator" formControlName="idKoordinator">
+                    <mat-option *ngFor="let ppl of listKoordinator" [value]="ppl.id">
+                        {{ppl.namaDepan + ' ' + ppl.namaBelakang}}
+                    </mat-option>
+                </mat-select>
+                <div *ngIf="form.get('idKoordinator').invalid && (form.get('idKoordinator').dirty ||
+                form.get('idKoordinator').touched)" class="invalid-feedback">
+                    <div *ngIf="form.get('idKoordinator').errors?.required">
+                        Pilih Koordinator untuk pengerjaan
+                    </div>
+                </div>
+            </mat-form-field>
+            <!--Catatan-->
+            <mat-form-field hintLabel="Catatan" appearance="fill">
+                <mat-label>Catatan</mat-label>
+                <input matInput #input placeholder="contoh: segera" id="notes" formControlName="notes" required class="form-control">
+            </mat-form-field>
+        </div>
+
+            <mat-dialog-actions>
+                <button *ngIf="id" type="submit" (click)="onSubmit()"
+                [disabled]="form.invalid" mat-raised-button>Simpan</button>
+            <button *ngIf="!id" type="submit" (click)="onSubmit()"
+                [disabled]="form.invalid" class="btn btn-success" mat-raised-button>Buat</button>
+            <button type="button" matDialogClose mat-raised-button>Cancel</button>
+            </mat-dialog-actions>
+    </div>
+</div>

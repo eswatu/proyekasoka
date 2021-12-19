@@ -1,0 +1,15 @@
+
+mat-menu-item {
+    color: inherit;
+  }
+  .active-list-item {
+    color: #06ce63 !important; /* Note: You could also use a custom theme */
+  }
+  mat-toolbar {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
+    margin-left: 8px;
+    margin-right: 8px;
+  }

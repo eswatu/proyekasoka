@@ -1,0 +1,5 @@
+#ignore node_module
+clientapp/node_modules/
+clientapp/.angular/
+serverside/bin/
+

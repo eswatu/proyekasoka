@@ -1,0 +1,42 @@
+<mat-toolbar color="primary" fxShow fxHide.lt-sm="true">
+    <mat-toolbar-row  fxLayout="row">
+      <span>Job Order Monitoring</span>
+      <ng-container>
+        <div>
+          <button mat-button routerLink="dashboard" routerLinkActive="active-list-item" >Dashboard</button>
+          <button mat-button routerLink="laporan" routerLinkActive="active-list-item">Laporan</button>
+          <button mat-button routerLink="usermanagement" routerLinkActive="active-list-item">Profil</button>
+          <!-- <button mat-button (click)="logout()" >Logout</button> -->
+        </div>
+
+      </ng-container>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <!--part 2 mendingan jadi komponen sendiri?-->
+<!-- <mat-drawer-container fxHide fxShow.lt-sm="true" fxLayout="column" >
+  <mat-drawer #drawerMenu mode="side" color="primary">
+      <div fxLayout="row">
+        <button mat-button routerLink="dashboard" routerLinkActive="active-list-item" >Dashboard</button>
+      </div>
+      <div fxLayout="row">
+        <button mat-button [matMenuTriggerFor]="menu2">Surat</button>
+        <mat-menu #menu2="matMenu">
+          <button mat-menu-item routerLink="letters" routerLinkActive="active-list-item">Surat Masuk</button>
+          <button mat-menu-item routerLink="assignment" routerLinkActive="active-list-item">Penugasan</button>
+        </mat-menu>
+      </div>
+      <div fxLayout="row">
+        <button mat-button [matMenuTriggerFor]="menu1"> Hai id anda </button>
+        <mat-menu #menu1="matMenu">
+          <button mat-menu-item routerLink="userprofile" routerLinkActive="active-list-item">Profile</button> -->
+          <!-- <button mat-menu-item (click)="logout()" routerLink="#">Logout</button> -->
+        <!-- </mat-menu>
+      </div>
+      <div fxLayout="row"> -->
+        <!-- <button mat-button (click)="logout()" >Logout</button> -->
+      <!-- </div>
+  </mat-drawer>
+    <button mat-flat-button color="primary" (click)="drawerMenu.toggle()">
+      <mat-icon>view_list</mat-icon>
+    </button>
+</mat-drawer-container> -->

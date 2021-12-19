@@ -1,0 +1,150 @@
+<div class="row" *ngIf="!jobOrders">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div fxLayoutAlign="start stretch" fxLayout="column" fxFlexFill >
+        <mat-drawer-container hasBackdrop="true">
+            <mat-drawer #drawer mode="push">
+              <!--Ini untuk filter-->
+              <div fxLayout="column" fxLayoutGap="10px">
+                <!--Untuk Menu Search-->
+                <div fxFlexOrder="1">
+
+                  <mat-form-field fxFlex>
+                    <mat-label>Pilih Kolom Filter</mat-label>
+                    <mat-select [(value)]="defaultFilterColumn">
+                      <mat-option value="namaKlien">Nama Klien</mat-option>
+                      <mat-option value="nomorSurat">Nomor Surat</mat-option>
+                      <mat-option value="notes">Catatan</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                    <mat-form-field [hidden]="!jobOrders" fxFlex>
+                        <input matInput (keyup)="onFilterTextChanged($event.target.value)" placeholder='Filter {{ (defaultFilterColumn == "namaKlien" )? "Nama Klien": (defaultFilterColumn == "nomorSurat") ? "Nomor Surat": (defaultFilterColumn == "notes" ? "Catatan" : "Nama Klien") }}' />
+                    </mat-form-field>
+                </div>
+                <mat-divider></mat-divider>
+
+                <!--filter Tanggal-1-->
+                <div fxFlexOrder="2">
+                  <mat-card-title>Filter Tanggal Terima Surat</mat-card-title>
+                  <mat-tab-group dynamicHeight (selectedTabChange)="onTabChanged($event)">
+                    <mat-tab label="Hari">
+                      <mat-card>
+                        <mat-card-actions>
+                          <mat-button-toggle-group [formControl]="taskRange" (change)="loadData(null)" vertical fxFlexFill>
+                            <mat-button-toggle value="1">Hari Ini</mat-button-toggle>
+                            <mat-button-toggle value="7">7 Hari</mat-button-toggle>
+                            <mat-button-toggle value="30">Bulan Ini</mat-button-toggle>
+                            <mat-button-toggle value="180">6 Bulan Terakhir</mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </mat-card-actions>
+                      </mat-card>
+                    </mat-tab>
+                    <mat-tab label="Tanggal">
+                      <mat-card>
+                        <mat-card-actions>
+                          <mat-form-field appearance="fill">
+                            <mat-label>Pilih Range Terima Surat</mat-label>
+                            <mat-date-range-input [rangePicker]="picker">
+                              <input matStartDate placeholder="Tanggal Awal" [formControl]="startDate">
+                              <input matEndDate placeholder="Tanggal Akhir" [formControl]="endDate">
+                            </mat-date-range-input>
+                            <button mat-raised-button (click)="loadData(null)" >Update Filter</button>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                          </mat-form-field>
+                        </mat-card-actions>
+                      </mat-card>
+                    </mat-tab>
+                  </mat-tab-group>
+                </div>
+                <!--Filter Status-->
+                <div fxFlexOrder="3">
+                  <mat-card-title>Filter Status</mat-card-title>
+                  <mat-tab-group dynamicHeight>
+                    <mat-tab label="Status">
+                      <mat-card>
+                        <mat-card-actions>
+                          <mat-button-toggle-group [formControl]="filterStatus" (change)="loadData(null)" vertical fxFlexFill value="all">
+                            <mat-button-toggle value="all">Semua</mat-button-toggle>
+                            <mat-button-toggle value="close">Sudah Dikerjakan</mat-button-toggle>
+                            <mat-button-toggle value="open">Belum Selesai</mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </mat-card-actions>
+                      </mat-card>
+                    </mat-tab>
+                  </mat-tab-group>
+
+                </div>
+
+              </div>
+            </mat-drawer>
+
+            <!--Konten Utama-->
+            <div fxLayout="column" fxLayoutAlign="end stretch" >
+
+                <!--Informasi Judul Menu-->
+                <div fxLayout="row" fxFlexOrder="1" fxLayoutAlign="center">
+                  <h1>Daftar Order</h1>
+                </div>
+
+                <!--Barisan tombol Menu-->
+                <div fxLayout="row" fxFlexOrder="2" id="barisanTombol">
+                  <button mat-raised-button (click)="drawer.toggle()">Filter</button>
+                  <button mat-raised-button (click)="openDialog(null)">Tambah Order</button>
+                </div>
+
+    <div fxLayout="row" fxFlexOrder="3" fxLayoutAlign="center stretch" fxFlex="80">
+        <table mat-table [dataSource]="jobOrders" class="table-striped mat-elevation-z8"
+        [hidden]="!jobOrders" matSort (matSortChange)="loadData()" matSortActive="{{defaultSortColumn}}"
+        matSortDirection='{{defaultSortOrder}}'>
+            <!--kolom index-->
+                <ng-container matColumnDef="index">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Index</th>
+                <td mat-cell *matCellDef="let i = index">{{i + 1}}</td>
+            </ng-container>
+
+            <!--kolom Nama Klien-->
+            <ng-container matColumnDef="namaKlien">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header >Nama Klien</th>
+                <td mat-cell *matCellDef="let jo">{{jo.namaKlien}}</td>
+            </ng-container>
+            <!--kolom Nomor Surat-->
+            <ng-container matColumnDef="nomorSurat">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header >Nomor Surat</th>
+                <td mat-cell *matCellDef="let jo">{{jo.nomorSurat}}</td>
+            </ng-container>
+            <!--kolom Tanggal Surat-->
+            <ng-container matColumnDef="tanggalSurat">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header >Tanggal Surat</th>
+                <td mat-cell *matCellDef="let jo">{{jo.tanggalSurat | date}}</td>
+            </ng-container>
+            <!--kolom Catatan-->
+            <ng-container matColumnDef="notes">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header >Catatan</th>
+                <td mat-cell *matCellDef="let jo">{{jo.notes}}</td>
+            </ng-container>
+            <!--kolom Koordinator-->
+            <ng-container matColumnDef="koordinator">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header >Koordinator</th>
+                <td mat-cell *matCellDef="let jo">{{jo.koordinator}}</td>
+            </ng-container>
+            <!--kolom Status-->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header >Status</th>
+                <td mat-cell *matCellDef="let jo">{{jo.status}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog(row.id)"></tr>
+        </table>
+    </div>
+        <!--paginator dir-->
+        <div fxLayout="row" fxFlex="20" fxFlexOrder="4">
+            <mat-paginator [hidden]="!jobOrders"
+            (page)="getData($event)"
+            [pageSize]="10"
+            [pageSizeOptions]="[10,20,50]"
+            showFirstLastButtons></mat-paginator>
+        </div>
+</div>
