@@ -7,6 +7,7 @@ export interface Joborder
     idKoordinator: number;
     koordinator: string;
     notes: string;
+    currentExpense: number;
     status: JobStatus;
     createTime: Date;
     closeTime: Date;

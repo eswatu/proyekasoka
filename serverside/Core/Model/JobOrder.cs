@@ -14,6 +14,7 @@ namespace serverside.Core.Models
         public int IdKoordinator{ get; set; }
         public User Koordinator {get; set;}
         public string Notes { get; set; }
+        public int CurrentExpense { get; set; }
         public JobStatus Status { get; set; }
         //system
         public DateTime CreateTime { get; set; }

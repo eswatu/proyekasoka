@@ -1,1 +1,5 @@
-<p>dashboard works!</p>
+<div class="row">
+    <div class="col-sm" *ngFor="let order of joborders;">
+        <app-joblist [job]="order"></app-joblist>
+    </div>
+</div>

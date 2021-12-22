@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="additional" [style.background]="job.status ? 'purple': 'pink'">
+    <div class="user-card">
+      <div class="level center">
+        {{job.nomorSurat}}
+      </div>
+      <div>
+        <img width="110" height="110" class="center" src="data:image/png;base64,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" />
+      </div>
+      <div class="points center">
+        {{job.tanggalSurat | date}}
+      </div>
+    </div>
+    <div class="more-info">
+      <h1>{{job.namaKlien}}</h1>
+      <div class="coords">
+        <span>NPWP</span>
+        <span>{{job.koordinator}}</span>
+      </div>
+      <div class="coords">
+        <span>Catatan</span>
+        <span>{{job.notes}}</span>
+      </div>
+      <div class="coords">
+        <span>Expense</span>
+        <span>{{job.currentExpense}}</span>
+      </div>
+
+      <div class="coords">
+          <div class=" progress progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <br />
+      <div class="coords">
+        <button mat-raised-button [routerLink]="['/dashboard', job.id]" color="primary">Update Status</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="general">
+    <h1>{{job.namaKlien}}</h1>
+    <p>{{job.nomorSurat + " " + job.tanggalSurat}}</p>
+    <span class="more">{{job.notes}}</span>
+  </div>
+</div>

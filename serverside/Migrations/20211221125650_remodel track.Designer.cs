@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using serverside.Data;
 
 namespace serverside.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211221125650_remodel track")]
+    partial class remodeltrack
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,9 +59,6 @@ namespace serverside.Migrations
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("CurrentExpense")
-                        .HasColumnType("int");
 
                     b.Property<int>("IdKoordinator")
                         .HasColumnType("int");

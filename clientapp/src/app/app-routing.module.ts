@@ -1,3 +1,4 @@
+import { JobSummaryComponent } from './dashboard/job-summary/job-summary.component';
 import { LaporanComponent } from './laporan/laporan.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -9,7 +10,8 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
   { path:'login', component:LoginComponent},
-  { path: 'laporan', component: LaporanComponent , canActivate: [AuthGuard]},
+  { path: 'laporan', component: LaporanComponent, canActivate: [AuthGuard] },
+  { path: 'summary', component: JobSummaryComponent , canActivate: [AuthGuard]},
   { path:'**', redirectTo: '' }
 ];
 @NgModule({

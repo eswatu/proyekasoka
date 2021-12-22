@@ -41,6 +41,7 @@ namespace serverside
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IJoborderRepository, JoborderRepository>();
+            services.AddScoped<IJobTrackRepository, JobTrackRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(typeof(Startup).Assembly);
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));

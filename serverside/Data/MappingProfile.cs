@@ -16,7 +16,7 @@ namespace serverside.Data
             CreateMap<Joborder, JoborderResource>();
             CreateMap<Joborder, JoborderDTO>()
             .ForMember(jo => jo.Koordinator, opt => opt.MapFrom(j => string.Concat(j.Koordinator.NamaDepan," ",j.Koordinator.NamaBelakang)));
-
+            CreateMap<JobTrackResource, JobTrack>();
         }
     }
 }

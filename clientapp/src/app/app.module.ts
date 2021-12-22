@@ -1,3 +1,4 @@
+import { JoblistComponent } from './dashboard/joblist/joblist.component';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { AuthenticationService } from './_services/authentication.service';
@@ -17,6 +18,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DatePipe } from '@angular/common';
 import { appInitializer } from './_helpers';
 import { LoginComponent } from './login/login.component';
+import { JobSummaryComponent } from './dashboard/job-summary/job-summary.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { LoginComponent } from './login/login.component';
     NavigationBarComponent,
     LaporanComponent,
     DetilLaporanComponent,
-    LoginComponent
+    LoginComponent,
+    JoblistComponent,
+    JobSummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +45,7 @@ import { LoginComponent } from './login/login.component';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
