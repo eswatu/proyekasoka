@@ -1,0 +1,25 @@
+<div class="track">
+    <div matDialogContent class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div *ngIf="form.invalid" class="alert alert-danger">
+            <strong>Error</strong>Ada yang salah
+        </div>
+
+        <div class="form-group" style="min-height: fit-content;min-width: auto;">
+            <mat-form-field hintLabel="laporan" appearance="fill">
+                <mat-label>Isi laporan</mat-label>
+                <input matInput #input placeholder="Pembayaran Uang Makan" id="laporan" formControlName="laporan" required class="form-control">
+            </mat-form-field>
+            <mat-form-field hintLabel="nominal" appearance="fill">
+                <mat-label>Jumlah dalam rupiah</mat-label>
+                <input matInput #input placeholder="50000" id="nominal" formControlName="nominal" required class="form-control">
+            </mat-form-field>
+            <mat-dialog-actions>
+                <button *ngIf="orderId" type="submit" (click)="onSubmit()"
+                [disabled]="form.invalid" mat-raised-button>Simpan</button>
+                <button *ngIf="!orderId" type="submit" (click)="onSubmit()"
+                [disabled]="form.invalid" class="btn btn-success" mat-raised-button>Buat</button>
+            <button type="button" matDialogClose mat-raised-button>Cancel</button>
+            </mat-dialog-actions>
+        </div>
+    </div>
+</div>

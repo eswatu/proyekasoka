@@ -7,7 +7,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { BaseFormComponent } from 'src/app/models/base.form.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 
 @Component({
@@ -30,8 +29,7 @@ export class DetilLaporanComponent extends BaseFormComponent implements OnInit {
   listKoordinator: User[];
   today = new Date();
 
-  constructor(private router: Router,
-              private usersService: UsersService,
+  constructor(private usersService: UsersService,
               private jobOrderService: JobOrderService,
               private dialogRef: MatDialogRef<DetilLaporanComponent>,
               @Inject(MAT_DIALOG_DATA) data) {

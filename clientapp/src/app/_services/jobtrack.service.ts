@@ -15,37 +15,23 @@ export class JobtrackService extends BaseService{
 //base url
   url;
 
-  getData<ApiResult>(
-    pageIndex: number,
-    pageSize: number,
-    sortColumn: string,
-    sortOrder: string,
-    filterColumn: string,
-    filterQuery: string
-): Observable<ApiResult> {
+  getData<JobTrack>(orderId: number): Observable<JobTrack> {
+    var refers = this.url + '/forOrderId/';
     var params = new HttpParams()
-        .set("pageIndex", pageIndex.toString())
-      .set("pageSize", pageSize.toString())
-        .set("sortColumn", sortColumn)
-        .set("sortOrder", sortOrder);
-
-    if (filterQuery) {
-        params = params
-            .set("filterColumn", filterColumn)
-            .set("filterQuery", filterQuery);
+      .set("orderId", orderId);
+    return this.http.get<JobTrack>(refers, { params });
     }
 
-    return this.http.get<ApiResult>(this.url + '/forOrderId/{}',{ params });
-}
   get<JobTrack>(id: number): Observable<JobTrack> {
     let urlid = this.url + '/'+ id;
-    return this.http.get<Joborder>(urlid);
+    return this.http.get<JobTrack>(urlid);
   }
-  put<Joborder>(item): Observable<Joborder> {
-    let urlid = this.url + item.id;
-    return this.http.put<Joborder>(urlid, item);
+  put<JobTrack>(item): Observable<JobTrack> {
+    let urlid = this.url + '/'+ item.id;
+    return this.http.put<JobTrack>(urlid, item);
   }
-  post<JoborderResource>(item: JoborderResource): Observable<JoborderResource> {
-    return this.http.post<JoborderResource>(this.url, item);
+  post<JobTrack>(item: JobTrack): Observable<JobTrack> {
+    let urlid = this.url + '/';
+    return this.http.post<JobTrack>(urlid, item);
   }
 }

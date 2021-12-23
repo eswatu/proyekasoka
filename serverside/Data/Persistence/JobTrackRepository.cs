@@ -30,7 +30,7 @@ namespace serverside.Data.Persistence
             return await context.JobTracks.FindAsync(trackId);
         }
 
-        public  IQueryable<JobTrack> GetJobTracksFor(int jobId)
+        public IQueryable<JobTrack> GetJobTracksFor(int jobId)
         {
             var result = context.JobTracks.Where(x => x.IdJoborder == jobId)
                             .OrderBy(y => y.TrackTime).AsQueryable();

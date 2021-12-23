@@ -19,6 +19,7 @@ import { DatePipe } from '@angular/common';
 import { appInitializer } from './_helpers';
 import { LoginComponent } from './login/login.component';
 import { JobSummaryComponent } from './dashboard/job-summary/job-summary.component';
+import { TrackformComponent } from './dashboard/job-summary/trackform/trackform.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { JobSummaryComponent } from './dashboard/job-summary/job-summary.compone
     DetilLaporanComponent,
     LoginComponent,
     JoblistComponent,
-    JobSummaryComponent
+    JobSummaryComponent,
+    TrackformComponent
   ],
   imports: [
     BrowserModule,

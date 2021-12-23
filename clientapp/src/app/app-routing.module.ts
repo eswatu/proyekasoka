@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
   { path:'login', component:LoginComponent},
   { path: 'laporan', component: LaporanComponent, canActivate: [AuthGuard] },
-  { path: 'summary', component: JobSummaryComponent , canActivate: [AuthGuard]},
+  { path: 'summary/:id', component: JobSummaryComponent , canActivate: [AuthGuard]},
   { path:'**', redirectTo: '' }
 ];
 @NgModule({

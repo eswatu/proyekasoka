@@ -42,7 +42,7 @@ export class JobOrderService extends BaseService{
     return this.http.get<Joborder>(urlid);
   }
   put<Joborder>(item): Observable<Joborder> {
-    let urlid = this.url + item.id;
+    let urlid = this.url +'/'+ item.id;
     return this.http.put<Joborder>(urlid, item);
   }
   post<JoborderResource>(item: JoborderResource): Observable<JoborderResource> {

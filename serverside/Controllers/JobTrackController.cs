@@ -29,26 +29,14 @@ namespace serverside.Controllers
         }
         [HttpGet]
         [Route("forOrderId/{orderId}")]
-        public async Task<ActionResult<ApiResult<JobTrack>>> GetJobTracks(
-            int jobId,
-            int pageIndex = 0,
-            int pageSize = 10,
-            string sortColumn = null,
-            string sortOrder = null,
-            string filterColumn = null,
-            string filterQuery = null
-        ) {
-            var jobs = repository.GetJobTracksFor(jobId);
-
-            return await ApiResult<JobTrack>.CreateAsync(
-                jobs.Select(j => new JobTrack()),
-                pageIndex,
-                pageSize,
-                sortColumn,
-                sortOrder,
-                filterColumn,
-                filterQuery
-                );
+        public async Task<ActionResult<JobTrack>> GetJobTracks(int orderId) {
+            var jobs = repository.GetJobTracksFor(orderId);
+            if (jobs != null)
+            {
+                return Ok(jobs);
+            } else {
+                return BadRequest();
+            }
         }
         [HttpGet()]
         [Route("Calculate/{orderId}")]
