@@ -31,23 +31,13 @@ namespace serverside.Controllers
         [Route("forOrderId/{orderId}")]
         public async Task<ActionResult<JobTrack>> GetJobTracks(int orderId) {
             var jobs = repository.GetJobTracksFor(orderId);
+            repository.Calculate(orderId);
             if (jobs != null)
             {
                 return Ok(jobs);
             } else {
                 return BadRequest();
             }
-        }
-        [HttpGet()]
-        [Route("Calculate/{orderId}")]
-        public int CalculateExpense(int jobId) {
-            var jobTracks = repository.GetJobTracksFor(jobId);
-            int expense = 0;
-            foreach (var item in jobTracks)
-            {
-                expense += item.Nominal;
-            }
-            return expense;
         }
 
         [HttpGet("{id}")]

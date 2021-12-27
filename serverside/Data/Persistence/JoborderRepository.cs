@@ -37,7 +37,7 @@ namespace serverside.Data.Persistence
              }
         }
 
-        public  IQueryable<Joborder> GetJobs(bool includeWorker = true)
+        public IQueryable<Joborder> GetJobs(bool includeWorker = true)
         {
             if (includeWorker) {
                 return  context.Joborders.Include(w => w.Koordinator)
@@ -51,6 +51,8 @@ namespace serverside.Data.Persistence
         {
             context.Joborders.Remove(job);
         }
+
+
 
     }
 }

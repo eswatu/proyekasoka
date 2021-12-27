@@ -16,8 +16,6 @@
             <mat-dialog-actions>
                 <button *ngIf="orderId" type="submit" (click)="onSubmit()"
                 [disabled]="form.invalid" mat-raised-button>Simpan</button>
-                <button *ngIf="!orderId" type="submit" (click)="onSubmit()"
-                [disabled]="form.invalid" class="btn btn-success" mat-raised-button>Buat</button>
             <button type="button" matDialogClose mat-raised-button>Cancel</button>
             </mat-dialog-actions>
         </div>

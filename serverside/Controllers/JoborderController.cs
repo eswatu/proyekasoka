@@ -27,6 +27,7 @@ namespace serverside.Controllers
             this.repository = repository;
             _mapper = mapper;
         }
+
         [HttpGet]
         public async Task<ActionResult<ApiResult<JoborderDTO>>> GetJobs(
             int pageIndex = 0,
@@ -60,7 +61,8 @@ namespace serverside.Controllers
                     Notes = j.Notes,
                     Status = j.Status,
                     CreateTime = j.CreateTime,
-                    CloseTime = j.CloseTime
+                    CloseTime = j.CloseTime,
+                    CurrentExpense = j.CurrentExpense
         }),
                 pageIndex,
                 pageSize,

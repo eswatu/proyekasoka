@@ -11,5 +11,7 @@ namespace serverside.Core
         void Add(JobTrack job);
         void Remove(JobTrack job);
         IQueryable<JobTrack> GetJobTracksFor(int jobId);
+        void Calculate(int orderId);
+
     }
 }

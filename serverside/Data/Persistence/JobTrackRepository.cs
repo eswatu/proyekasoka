@@ -41,6 +41,20 @@ namespace serverside.Data.Persistence
         {
             context.JobTracks.Remove(jobTrack);
         }
+        public void Calculate(int orderId)
+        {
+            int result = 0;
+            var order = context.Joborders.Find(orderId);
+            if (order != null)
+            {
+                var tracks = context.JobTracks.Where(x => x.IdJoborder == orderId);
+                foreach (var item in tracks) {
+                    result += item.Nominal;
+                }
+            }
+            order.CurrentExpense = result;
+            context.SaveChangesAsync();
+        }
 
     }
 }

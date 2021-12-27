@@ -31,12 +31,12 @@ export class TrackformComponent extends BaseFormComponent implements OnInit {
   }
 
   onSubmit() { 
-    var track = (this.orderId) ? this.jobTrack : <JobTrack>{};
+    var entry = <JobTrack>{};
 
-    track.laporan = this.form.get('laporan').value;
-    track.nominal = this.form.get('nominal').value;
-    track.idJobOrder = this.orderId;
-    this.jobtrackService.post<JobTrack>(track)
+    entry.laporan = this.form.get('laporan').value;
+    entry.nominal = this.form.get('nominal').value;
+    entry.idJobOrder = this.orderId;
+    this.jobtrackService.post<JobTrack>(entry)
       .subscribe(result => {
         console.log("Berhasil masuk");
 

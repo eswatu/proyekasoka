@@ -13,5 +13,6 @@ namespace serverside.Data.DTO
         public JobStatus Status { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime CloseTime { get; set; }
+        public int CurrentExpense { get; set; }
     }
 }

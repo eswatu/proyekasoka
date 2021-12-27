@@ -16,10 +16,9 @@ export class JobtrackService extends BaseService{
   url;
 
   getData<JobTrack>(orderId: number): Observable<JobTrack> {
-    var refers = this.url + '/forOrderId/';
-    var params = new HttpParams()
-      .set("orderId", orderId);
-    return this.http.get<JobTrack>(refers, { params });
+    var refers = this.url + '/forOrderId/'+ orderId;
+
+    return this.http.get<JobTrack>(refers);
     }
 
   get<JobTrack>(id: number): Observable<JobTrack> {
