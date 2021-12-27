@@ -1,42 +1,42 @@
-<mat-toolbar color="primary" fxShow fxHide.lt-sm="true">
+<mat-toolbar color="primary" fxShow fxHide.xs="true" >
     <mat-toolbar-row  fxLayout="row">
       <span>Job Order Monitoring</span>
-      <ng-container>
+      <ng-container *ngIf="user">
         <div>
           <button mat-button routerLink="dashboard" routerLinkActive="active-list-item" >Dashboard</button>
           <button mat-button routerLink="laporan" routerLinkActive="active-list-item">Laporan</button>
-          <button mat-button routerLink="usermanagement" routerLinkActive="active-list-item">Profil</button>
-          <!-- <button mat-button (click)="logout()" >Logout</button> -->
+          <button mat-button (click)="LogOut()" >Logout</button>
         </div>
-
       </ng-container>
     </mat-toolbar-row>
   </mat-toolbar>
   <!--part 2 mendingan jadi komponen sendiri?-->
-<!-- <mat-drawer-container fxHide fxShow.lt-sm="true" fxLayout="column" >
+<mat-drawer-container fxHide fxShow.xs="true" fxLayout="column" >
   <mat-drawer #drawerMenu mode="side" color="primary">
       <div fxLayout="row">
         <button mat-button routerLink="dashboard" routerLinkActive="active-list-item" >Dashboard</button>
-      </div>
-      <div fxLayout="row">
-        <button mat-button [matMenuTriggerFor]="menu2">Surat</button>
+        <button mat-button [matMenuTriggerFor]="menu2">Menu</button>
         <mat-menu #menu2="matMenu">
-          <button mat-menu-item routerLink="letters" routerLinkActive="active-list-item">Surat Masuk</button>
-          <button mat-menu-item routerLink="assignment" routerLinkActive="active-list-item">Penugasan</button>
+          <button mat-menu-item routerLink="dashboard" routerLinkActive="active-list-item">Dashboard</button>
+          <button mat-menu-item routerLink="laporan" routerLinkActive="active-list-item">Laporan</button>
         </mat-menu>
       </div>
+      <mat-divider></mat-divider>
+      <div fxLayout="row">
+        <button mat-button routerLink="laporan" routerLinkActive="active-list-item" >Laporan</button>
+      </div>
+      <mat-divider></mat-divider>
       <div fxLayout="row">
         <button mat-button [matMenuTriggerFor]="menu1"> Hai id anda </button>
         <mat-menu #menu1="matMenu">
-          <button mat-menu-item routerLink="userprofile" routerLinkActive="active-list-item">Profile</button> -->
-          <!-- <button mat-menu-item (click)="logout()" routerLink="#">Logout</button> -->
-        <!-- </mat-menu>
+          <button mat-menu-item (click)="LogOut()" routerLink="#">Logout</button>
+        </mat-menu>
       </div>
-      <div fxLayout="row"> -->
-        <!-- <button mat-button (click)="logout()" >Logout</button> -->
-      <!-- </div>
+      <div fxLayout="row">
+        <button mat-button (click)="LogOut()" >Logout</button>
+      </div>
   </mat-drawer>
-    <button mat-flat-button color="primary" (click)="drawerMenu.toggle()">
+    <button mat-flat-button color="primary" (click)="drawerMenu.toggle()" *ngIf="user">
       <mat-icon>view_list</mat-icon>
     </button>
-</mat-drawer-container> -->
+</mat-drawer-container>

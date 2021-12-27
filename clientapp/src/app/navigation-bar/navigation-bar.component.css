@@ -13,3 +13,7 @@ mat-menu-item {
     margin-left: 8px;
     margin-right: 8px;
   }
+  .stickyBar {
+    position: sticky;
+    top: 0;
+  }

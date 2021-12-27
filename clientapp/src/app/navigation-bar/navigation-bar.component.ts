@@ -1,3 +1,5 @@
+import { AuthenticationService } from './../_services/authentication.service';
+import { User } from './../models/user';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,11 +7,13 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './navigation-bar.component.html',
   styleUrls: ['./navigation-bar.component.css']
 })
-export class NavigationBarComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+export class NavigationBarComponent {
+  user: User;
+  constructor(private auService: AuthenticationService) {
+    this.auService.user.subscribe(x => this.user = x);
+   }
+  LogOut() { 
+    this.auService.logout();
   }
 
 }
