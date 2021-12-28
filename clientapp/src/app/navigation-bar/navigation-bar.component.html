@@ -14,27 +14,15 @@
 <mat-drawer-container fxHide fxShow.xs="true" fxLayout="column" >
   <mat-drawer #drawerMenu mode="side" color="primary">
       <div fxLayout="row">
-        <button mat-button routerLink="dashboard" routerLinkActive="active-list-item" >Dashboard</button>
         <button mat-button [matMenuTriggerFor]="menu2">Menu</button>
         <mat-menu #menu2="matMenu">
           <button mat-menu-item routerLink="dashboard" routerLinkActive="active-list-item">Dashboard</button>
           <button mat-menu-item routerLink="laporan" routerLinkActive="active-list-item">Laporan</button>
+          <button mat-button (click)="LogOut()" >Logout</button>
         </mat-menu>
       </div>
       <mat-divider></mat-divider>
-      <div fxLayout="row">
-        <button mat-button routerLink="laporan" routerLinkActive="active-list-item" >Laporan</button>
-      </div>
-      <mat-divider></mat-divider>
-      <div fxLayout="row">
-        <button mat-button [matMenuTriggerFor]="menu1"> Hai id anda </button>
-        <mat-menu #menu1="matMenu">
-          <button mat-menu-item (click)="LogOut()" routerLink="#">Logout</button>
-        </mat-menu>
-      </div>
-      <div fxLayout="row">
-        <button mat-button (click)="LogOut()" >Logout</button>
-      </div>
+
   </mat-drawer>
     <button mat-flat-button color="primary" (click)="drawerMenu.toggle()" *ngIf="user">
       <mat-icon>view_list</mat-icon>

@@ -125,6 +125,11 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header >Catatan</th>
                 <td mat-cell *matCellDef="let jo">{{jo.notes}}</td>
             </ng-container>
+            <!--kolom Nominal-->
+            <ng-container matColumnDef="currentExpense">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header >Biaya</th>
+              <td mat-cell *matCellDef="let jo">{{jo.currentExpense | currency:'IDR'}}</td>
+          </ng-container>
             <!--kolom Koordinator-->
             <ng-container matColumnDef="koordinator">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header >Koordinator</th>

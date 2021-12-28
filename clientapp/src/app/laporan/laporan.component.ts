@@ -19,7 +19,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 export class LaporanComponent implements OnInit {
 
  //table
- public displayedColumns: string[] = ['index','namaKlien', 'nomorSurat', 'tanggalSurat', 'koordinator','notes','status'];
+ public displayedColumns: string[] = ['index','namaKlien', 'nomorSurat', 'tanggalSurat', 'koordinator','notes','status', 'currentExpense'];
  public jobOrders: MatTableDataSource<Joborder>;
  defaultPageIndex: number = 0;
  defaultPageSize: number = 10;

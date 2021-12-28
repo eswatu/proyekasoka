@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template: `
   <div fxLayout="column" fxFill>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <div fxFlex="7" static>
         <navigation-bar></navigation-bar>
     </div>

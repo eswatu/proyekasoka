@@ -47,5 +47,14 @@ export class JobSummaryComponent implements OnInit {
       this.jobTracks = null;
       this.loadSummary();
     });
+
+  }
+  calculation() {
+    let sum: number = 0;
+    if (this.jobTracks)
+      for (let row of this.jobTracks.data) {
+        if (row.id != 0) sum += row.nominal;
+      }
+    return sum;
   }
 }
