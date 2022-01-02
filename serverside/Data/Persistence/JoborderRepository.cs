@@ -52,7 +52,5 @@ namespace serverside.Data.Persistence
             context.Joborders.Remove(job);
         }
 
-
-
     }
 }

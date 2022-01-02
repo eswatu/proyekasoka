@@ -43,6 +43,7 @@ namespace serverside
             services.AddScoped<IJoborderRepository, JoborderRepository>();
             services.AddScoped<IJobTrackRepository, JobTrackRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            
             services.AddAutoMapper(typeof(Startup).Assembly);
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.IgnoreNullValues = true);
