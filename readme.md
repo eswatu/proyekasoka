@@ -7,11 +7,12 @@ Requirement:
     c. masukkan command: npm install -g @angular/cli
     d. tekan enter
 
-Pre-instal:
+Install:
 1. Setelah clone github masuk ke folder "serverside" lalu jalankan perintah: dotnet restore
 2. Masuk ke folder "clientapp" lalu jalankan perintah: npm install
-3. Buat Database sesuai konfigurasi di "serverside/appsettings.json" bagian ConnectionStrings
+3. Buat koneksi ke Database sesuai konfigurasi di "serverside/appsettings.json" bagian ConnectionStrings
 
 Running:
 1. Masuk ke folder "serverside" jalankan perintah: dotnet watch run
 2. Masuk ke folder "clientapp" jalankan perintah: npm start
+3. Buka dengan browser ke laman localhost:4200
