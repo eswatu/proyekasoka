@@ -1,3 +1,5 @@
+import { AuthenticationService } from './../_services/authentication.service';
+import { map } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { DetilLaporanComponent } from './detil-laporan/detil-laporan.component';
 import { JobOrderService } from './../_services/job-order.service';
@@ -10,6 +12,7 @@ import { MatTableDataSource} from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ApiResult } from '../_services/base.service';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-laporan',
@@ -19,7 +22,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 export class LaporanComponent implements OnInit {
 
  //table
- public displayedColumns: string[] = ['index','namaKlien', 'nomorSurat', 'tanggalSurat', 'koordinator','notes','status', 'currentExpense'];
+ public displayedColumns: string[] = ['index','namaKlien', 'nomorSurat', 'tanggalSurat', 'koordinator','notes','status', 'currentExpense','aksi'];
  public jobOrders: MatTableDataSource<Joborder>;
  defaultPageIndex: number = 0;
  defaultPageSize: number = 10;
@@ -41,14 +44,24 @@ endDate = new FormControl();
 sdte: string;
   edte: string;
   
- filterId = 0;
+  filterId = "1";
+  userRole;
   filterRange = 30;
   filterStatus = new FormControl();
 
- constructor(private joborderService: JobOrderService, public dialog: MatDialog) {  }
+  constructor(private joborderService: JobOrderService,
+    public dialog: MatDialog,
+    public datepipe: DatePipe,
+    private authService: AuthenticationService) {
+    this.filterId = this.authService.userValue.id.toString();
+    this.userRole = this.authService.userValue.role;
+   }
 
  ngOnInit() {
    this.loadData(null);
+ }
+ myDateString(inp:Date){
+  return this.datepipe.transform(inp, 'ddMMyyyy');
  }
 
  openDialog(typeId:number) {
@@ -69,7 +82,6 @@ sdte: string;
  onTabChanged(event: MatTabChangeEvent) {
   if (event.index == 1) {
     this.taskRange.setValue(null);
-
   }
 }
 onFilterTextChanged(filterText: string) {
@@ -85,7 +97,8 @@ onFilterTextChanged(filterText: string) {
 }
 
 loadData(query: string = null) {
- var pageEvent = new PageEvent();
+  var pageEvent = new PageEvent();
+  
  pageEvent.pageIndex = this.defaultPageIndex;
  pageEvent.pageSize = this.defaultPageSize;
  if (query) {
@@ -112,13 +125,38 @@ getData(event: PageEvent) {
    ? this.filterQuery
    : null;
 
- this.joborderService.getData<ApiResult<Joborder>>(
+   if (this.taskRange.value != null) {
+    var today = new Date;
+    this.endDate.setValue(new Date);
+    if (this.taskRange.value === '1') {
+      this.startDate.setValue(today);
+    } else if (this.taskRange.value === '7') {
+      var last7 = new Date().setDate(today.getDate() - 7)
+      this.startDate.setValue(new Date(last7));
+    } else if (this.taskRange.value === '30') {
+      this.startDate.setValue(new Date(today.setDate(1)));
+    } else if (this.taskRange.value === '180') {
+      var last180 = new Date().setDate(today.getDate() - 180)
+      this.startDate.setValue(new Date(last180));
+    }
+
+    this.sdte = this.myDateString(this.startDate.value);
+    this.edte = this.myDateString(this.endDate.value);
+  } else {
+    this.sdte = this.myDateString(this.startDate.value) ?? "null";
+    this.edte = this.myDateString(this.endDate.value) ?? "null";
+   }
+  
+ this.joborderService.getCompleteData<ApiResult<Joborder>>(
    event.pageIndex,
    event.pageSize,
    sortColumn,
    sortOrder,
    filterColumn,
-   filterQuery)
+   filterQuery,
+   this.sdte,
+   this.edte,
+  this.filterId)
    .subscribe(result => {
      this.paginator.length = result.totalCount;
      this.paginator.pageIndex = result.pageIndex;

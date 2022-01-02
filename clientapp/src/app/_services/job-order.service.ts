@@ -27,8 +27,7 @@ export class JobOrderService extends BaseService{
         .set("pageIndex", pageIndex.toString())
       .set("pageSize", pageSize.toString())
         .set("sortColumn", sortColumn)
-        .set("sortOrder", sortOrder);
-
+      .set("sortOrder", sortOrder);
     if (filterQuery) {
         params = params
             .set("filterColumn", filterColumn)
@@ -36,6 +35,35 @@ export class JobOrderService extends BaseService{
     }
 
     return this.http.get<ApiResult>(this.url, { params });
+  }
+
+  getCompleteData<ApiResult>(
+  pageIndex: number,
+  pageSize: number,
+  sortColumn: string,
+  sortOrder: string,
+  filterColumn: string,
+  filterQuery: string,
+  startDate: string,
+  endDate: string,
+  idValue: string
+): Observable<ApiResult> {
+  var params = new HttpParams()
+    .set("pageIndex", pageIndex.toString())
+    .set("pageSize", pageSize.toString())
+    .set("sortColumn", sortColumn)
+    .set("sortOrder", sortOrder)
+    .set("startDate", startDate)
+    .set("endDate", endDate)
+    .set("idValue", idValue);
+
+  if (filterQuery) {
+      params = params
+          .set("filterColumn", filterColumn)
+          .set("filterQuery", filterQuery);
+  }
+
+  return this.http.get<ApiResult>(this.url, { params });
 }
   get<Joborder>(id: number): Observable<Joborder> {
     let urlid = this.url + '/'+ id;

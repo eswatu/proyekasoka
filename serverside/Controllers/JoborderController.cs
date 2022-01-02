@@ -36,16 +36,16 @@ namespace serverside.Controllers
             string sortOrder = null,
             string filterColumn = null,
             string filterQuery = null,
-            string startDate = null,
-            string endDate = null,
-            string idValue = null
+            string startDate = "null",
+            string endDate = "null",
+            string idValue = "1"
         ) {
             var jobs = repository.GetJobs();
-            if (idValue != null) {
+            if (idValue != "1") {
                 var vid = Int32.Parse(idValue);
                 jobs = jobs.Where(i => i.IdKoordinator == vid);
-            }
-            if (startDate != null && endDate != null) {
+            } 
+            if (startDate != "null" && endDate != "null") {
                 DateTime sd = new DateTime(int.Parse(startDate.Substring(4, 4)), int.Parse(startDate.Substring(2, 2)), int.Parse(startDate.Substring(0, 2)));
                 DateTime ed = new DateTime(int.Parse(endDate.Substring(4, 4)), int.Parse(endDate.Substring(2, 2)),int.Parse(endDate.Substring(0, 2)));
                 jobs = jobs.Where(d => d.CreateTime >= sd && d.CreateTime <= ed);

@@ -9,6 +9,7 @@ namespace serverside.Data.Resource
         public string NamaDepan { get; set; }
         public string NamaBelakang { get; set; }
         public string Username { get; set; }
+        public int Role { get; set; }
         public string JwtToken { get; set; }
 
         [JsonIgnore] // refresh token is returned in http only cookie
@@ -21,6 +22,7 @@ namespace serverside.Data.Resource
             NamaBelakang = user.NamaBelakang;
             Username = user.Username;
             JwtToken = jwtToken;
+            Role = ((int)user.Role);
             RefreshToken = refreshToken;
         }
     }
