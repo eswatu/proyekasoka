@@ -25,12 +25,13 @@ export class DashboardComponent implements OnInit {
     var filterColumn =  null;
     var filterQuery =  null;
   
-    this.joborderservice.getData<ApiResult<Joborder>>(
+    this.joborderservice.getCompleteData<ApiResult<Joborder>>(
       0,this.defaultPageSize,
-      "namaKlien",
-      "asc",
+      "namaKlien", "asc",
       filterColumn,
-      filterQuery)
+      filterQuery,
+      "null", "null",
+    this.currentUser.id.toString())
       .subscribe(result => {
         this.joborders = result.data;
       }, error => console.error(error));

@@ -92,7 +92,7 @@
                 <!--Barisan tombol Menu-->
                 <div fxLayout="row" fxFlexOrder="2" id="barisanTombol">
                   <button mat-raised-button (click)="drawer.toggle()">Filter</button>
-                  <button mat-raised-button (click)="openDialog(null)">Tambah Order</button>
+                  <button mat-raised-button *ngIf="userRole == 0" (click)="openDialog(null)">Tambah Order</button>
                 </div>
 
     <div fxLayout="row" fxFlexOrder="3" fxLayoutAlign="center stretch" fxFlex="80">
