@@ -91,6 +91,17 @@ namespace serverside.Controllers
             var jobDto = _mapper.Map<Joborder, JoborderDTO>(jobOrder);
             return Ok(jobDto);
         }
+        [HttpGet]
+        [Route("openOrderById/{orderId}")]
+        public async Task<ActionResult> OpenOrder(int orderId) {
+            var jobOrder = await repository.GetJob(orderId);
+            if (jobOrder != null) {
+                jobOrder.Status = JobStatus.Open;
+                await unitOfWork.CompleteAsync();
+            }
+            var jobDto = _mapper.Map<Joborder, JoborderDTO>(jobOrder);
+            return Ok(jobDto);
+        }
 
         [HttpPost]
         public async Task<ActionResult> CreateJob([FromBody] JoborderResource jobRes) {

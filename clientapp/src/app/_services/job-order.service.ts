@@ -81,4 +81,8 @@ export class JobOrderService extends BaseService{
     var refers = this.url + '/closeOrderById/' + id;
     return this.http.get<Joborder>(refers);
   }
+  openorder<Joborder>(id: number): Observable<Joborder> { 
+    var refers = this.url + '/openOrderById/' + id;
+    return this.http.get<Joborder>(refers);
+  }
 }

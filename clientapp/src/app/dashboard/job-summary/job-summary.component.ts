@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../_services/authentication.service';
 import { Joborder } from './../../models/joborder';
 import { JobOrderService } from './../../_services/job-order.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -15,11 +16,18 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 })
 export class JobSummaryComponent implements OnInit {
   orderId: number;
+  jobOrder: Joborder;
+  roleId;
+
   jobTracks: MatTableDataSource<JobTrack>;
   constructor(private jobtrackService: JobtrackService,
     private jobOrderService: JobOrderService,
+    private authService: AuthenticationService,
     private activatedRoute: ActivatedRoute,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog) {
+    this.roleId = this.authService.userValue.role;
+     }
+  
   displayedColumns = ['Nomor','nominal','laporan', 'trackTime']
 
   ngOnInit(): void {
@@ -27,6 +35,11 @@ export class JobSummaryComponent implements OnInit {
     this.loadSummary(this.orderId);
   }
   loadSummary(id: number) {
+    this.jobOrderService.get<Joborder>(id).subscribe(
+      result => { 
+        this.jobOrder = result;
+      }
+    );
     this.jobtrackService.getData<JobTrack[]>(id)
       .subscribe(result => {
         this.jobTracks = new MatTableDataSource<JobTrack>(result);
@@ -38,10 +51,14 @@ export class JobSummaryComponent implements OnInit {
       //eksekusi kode
       this.loadSummary(this.orderId);
     }, error => console.error(error));
+  }
+  OpenOrder() {
+    this.jobOrderService.openorder<Joborder>(this.orderId).subscribe(() => {
+      //eksekusi kode
+      this.loadSummary(this.orderId);
+    }, error => console.error(error));
    }
   handleDismiss() { }
-
-
   tambahTrack() { 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
