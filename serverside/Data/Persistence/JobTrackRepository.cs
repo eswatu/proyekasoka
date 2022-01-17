@@ -34,6 +34,7 @@ namespace serverside.Data.Persistence
         {
             var result = context.JobTracks.Where(x => x.IdJoborder == jobId)
                             .OrderBy(y => y.TrackTime).AsQueryable();
+            Calculate(jobId);
             return result;
         }
 
@@ -53,7 +54,12 @@ namespace serverside.Data.Persistence
                 }
             }
             order.CurrentExpense = result;
-            context.SaveChangesAsync();
+        }
+        public void CloseOrder(int orderId) { 
+            var order = context.JobTracks.Find(orderId);
+            if (order != null) { 
+                
+            }
         }
 
     }

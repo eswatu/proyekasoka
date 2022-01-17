@@ -20,6 +20,7 @@ import { appInitializer } from './_helpers';
 import { LoginComponent } from './login/login.component';
 import { JobSummaryComponent } from './dashboard/job-summary/job-summary.component';
 import { TrackformComponent } from './dashboard/job-summary/trackform/trackform.component';
+import {SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TrackformComponent } from './dashboard/job-summary/trackform/trackform.
     HttpClientModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [DatePipe,
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthenticationService] },

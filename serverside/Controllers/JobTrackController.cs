@@ -31,7 +31,6 @@ namespace serverside.Controllers
         [Route("forOrderId/{orderId}")]
         public async Task<ActionResult<JobTrack>> GetJobTracks(int orderId) {
             var jobs = repository.GetJobTracksFor(orderId);
-            repository.Calculate(orderId);
             if (jobs != null)
             {
                 return Ok(jobs);
@@ -39,6 +38,7 @@ namespace serverside.Controllers
                 return BadRequest();
             }
         }
+
 
         [HttpGet("{id}")]
         public async Task<ActionResult> GetJobTrack(int idTrack) {

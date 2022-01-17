@@ -16,3 +16,7 @@ Running:
 1. Masuk ke folder "serverside" jalankan perintah: dotnet watch run
 2. Masuk ke folder "clientapp" jalankan perintah: npm start
 3. Buka dengan browser ke laman localhost:4200
+
+=====Update 17-01-2022
+1. Reload data transaksi setelah penambahan
+2. Implementasi Close Order, tambahan plugin SweetAlert 2: https://github.com/sweetalert2/ngx-sweetalert2

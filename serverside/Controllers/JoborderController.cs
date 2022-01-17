@@ -80,6 +80,17 @@ namespace serverside.Controllers
             var jobDTO = _mapper.Map<Joborder, JoborderDTO>(joborder);
             return Ok(jobDTO);
         }
+        [HttpGet]
+        [Route("closeOrderById/{orderId}")]
+        public async Task<ActionResult> CloseOrder(int orderId) {
+            var jobOrder = await repository.GetJob(orderId);
+            if (jobOrder != null) {
+                jobOrder.Status = JobStatus.Close;
+                await unitOfWork.CompleteAsync();
+            }
+            var jobDto = _mapper.Map<Joborder, JoborderDTO>(jobOrder);
+            return Ok(jobDto);
+        }
 
         [HttpPost]
         public async Task<ActionResult> CreateJob([FromBody] JoborderResource jobRes) {

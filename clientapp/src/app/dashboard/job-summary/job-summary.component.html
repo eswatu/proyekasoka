@@ -1,13 +1,17 @@
 <div class="mat-elevation-z8">
     <div>
         <div class="coords">
-            <button mat-raised-button [routerLink]="['/dashboard']" color="primary">Kembali</button>
+            <button mat-raised-button [routerLink]="['/dashboard']">Kembali</button>
           </div>
         <h1>Data Pengeluaran Order:</h1>
-        <div fxLayout="row" fxFlexOrder="1" id="barisanTombol">
-            <button mat-raised-button (click)="tambahTrack()">Tambah Order</button>
-          </div>
+        <div fxLayout="row" fxFlexOrder="1" fxLayoutGap="20px" id="barisanTombol">
+            <button mat-raised-button (click)="tambahTrack()" color="primary">Tambah Transaksi</button>
           <h3>Jumlah Sementara: {{calculation()|currency:'IDR'}}</h3>
+          
+          <button mat-raised-button
+          [swal]="{ title:'Yakin Tutup Order ini?',
+          showDenyButton:true, denyButtonText:'Batal Tutup',
+          showCancelButton:false}" (confirm)="konfirmasi()" (deny)="handleDismiss()" color="warn">Close Order</button>
     </div>
     <div [hidden]="jobTracks">
         <h2>Belum ada data</h2>

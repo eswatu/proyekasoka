@@ -15,7 +15,7 @@
             </mat-form-field>
             <mat-dialog-actions>
                 <button *ngIf="orderId" type="submit" (click)="onSubmit()"
-                [disabled]="form.invalid" mat-raised-button>Simpan</button>
+                [disabled]="form.invalid" mat-raised-button matDialogClose>Simpan</button>
             <button type="button" matDialogClose mat-raised-button>Cancel</button>
             </mat-dialog-actions>
         </div>

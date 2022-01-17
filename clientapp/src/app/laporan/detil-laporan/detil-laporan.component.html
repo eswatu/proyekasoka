@@ -3,9 +3,9 @@
     <p *ngIf="this.id && !jobOrder"><em>Loading...</em></p>
 
     <div matDialogContent class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div *ngIf="form.invalid " class="alert alert-danger">
+        <!-- <div *ngIf="form.invalid " class="alert alert-danger">
             <strong>ERROR</strong>:Surat yang sama pernah dientry.
-        </div>
+        </div> -->
         <div class="form-group" style="min-height: fit-content;min-width: auto;">
             <!--nama klien-->
             <mat-form-field hintLabel="Nama Klien" appearance="fill">

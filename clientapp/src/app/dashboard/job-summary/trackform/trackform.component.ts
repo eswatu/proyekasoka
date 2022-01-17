@@ -11,7 +11,7 @@ import { Component, OnInit, Inject } from '@angular/core';
   styleUrls: ['./trackform.component.css']
 })
 export class TrackformComponent extends BaseFormComponent implements OnInit {
-  orderId: number;
+  public orderId: number;
   jobTrack: JobTrack;
 
   override form: FormGroup;

@@ -1,3 +1,4 @@
+import { Joborder } from './../models/joborder';
 import { JoborderResource } from './../models/JoborderResource';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -75,5 +76,9 @@ export class JobOrderService extends BaseService{
   }
   post<JoborderResource>(item: JoborderResource): Observable<JoborderResource> {
     return this.http.post<JoborderResource>(this.url, item);
+  }
+  closeorder<Joborder>(id: number): Observable<Joborder> { 
+    var refers = this.url + '/closeOrderById/' + id;
+    return this.http.get<Joborder>(refers);
   }
 }
